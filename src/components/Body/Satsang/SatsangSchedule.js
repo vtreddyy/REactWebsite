@@ -10,8 +10,7 @@ const SatsangSchedule = () => {
     fetch('https://react-inte-default-rtdb.firebaseio.com/Satsungs.json')
       .then(response => response.json())
       .then(data => {
-        const allEvents = Object.values(data);  // Convert events from object to array
-        // Filter events for the current month
+        const allEvents = Object.values(data);
         const monthEvents = allEvents.filter(event => {
           const eventDate = new Date(event.date);
           return eventDate.getMonth() === currentMonth && eventDate.getFullYear() === currentYear;
@@ -25,7 +24,7 @@ const SatsangSchedule = () => {
 
   return (
     <div className="timetable">
-      <h1>This Month Satsangs at Houston</h1>
+      <h1>This Month Satsangs</h1>
       <ul>
         {events.map(event => (
           <li key={event.date} className="listItem">
