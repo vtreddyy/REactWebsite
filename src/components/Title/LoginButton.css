@@ -1,0 +1,21 @@
+.btn-outline {
+    font-size: 14px;
+    font-weight: 300;
+    background: #ffae00;
+    color: #ffffff;
+    float: left;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-transform: none;
+    width: auto;
+    text-align: center;
+    margin-top: 15px;
+    border: none;
+  }
+
+  .btn-outline:hover {
+    font-size: 16px; 
+    padding: 10px 20px;
+    transition: font-size 0.3s ease, padding 0.3s ease;
+}

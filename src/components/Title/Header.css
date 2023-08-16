@@ -16,19 +16,4 @@
     font-size: 18px;
   }
 
-  .btn-outline {
-    font-size: 14px;
-    font-weight: 300;
-    background: #ffae00;
-    color: #ffffff;
-    float: left;
-    padding: 8px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    text-transform: none;
-    width: auto;
-    text-align: center;
-    margin-top: 15px;
-    border: none;
-  }
   
