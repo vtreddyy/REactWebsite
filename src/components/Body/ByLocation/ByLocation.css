@@ -1,8 +1,11 @@
 .showcase-container {
-  margin: 0 auto;
+  color: #444;
+  background-color: #f9f9f9;
   padding: 20px;
-  background-color: rgb(250, 250, 250);
-  color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+  margin: 20px auto;
 }
 
 .showcase-title {
@@ -13,8 +16,8 @@
 }
 
 .filter-container {
-  margin-top: 20px;
-  text-align: center;
+  margin-top:20px;
+  max-width: 100px;
 }
 
 .filter-title {
@@ -38,16 +41,16 @@
 }
 
 .work-items-container {
-  margin-top: 40px;
+  margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 1px;
 }
 
 .work-item {
-  width: 200px;              
+  width: 250px;              
   height: 150px;          
   border: 1px solid #ffae00;
   padding: 15px;
@@ -75,12 +78,6 @@
 .work-item-description {
   margin-bottom: 10px;
 }
-
-.work-item-small-description {
-  font-size: 14px;
-  margin-top: 4px;
-}
-
 
 .modal-overlay {
   position: fixed;
