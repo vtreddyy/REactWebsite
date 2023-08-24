@@ -1,0 +1,56 @@
+// p0lace this in the show case if you wanna display from api 
+
+
+import React, { useState, useEffect } from 'react';
+import LocationContainer from './LocationContainer';
+import Modal from './Modal';
+import './ByLocation.css';
+
+const Showcase = () => {
+    const [locations, setLocations] = useState([]);
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        fetch('https://react-inte-default-rtdb.firebaseio.com/Satsungs.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch');
+            }
+            return response.json();
+        })
+        .then(data => {
+            setLocations(data);
+            setIsLoading(false);
+        })
+        .catch(err => {
+            console.error('Error fetching data:', err);
+            setError(err.message);
+            setIsLoading(false);
+        });
+    }, []);
+
+    const handleClick = (index) => {
+        setSelectedItem(index);
+    };
+
+    const handleClose = () => {
+        setSelectedItem(null);
+    };
+
+    if (isLoading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
+
+    return (
+        <div className="showcase-container">
+            <h1 className="showcase-title">Community Activities in Houston</h1>
+            <LocationContainer LocationData={locations} onItemClick={handleClick} />
+            {selectedItem !== null && (
+                <Modal item={locations[selectedItem]} onClose={handleClose} />
+            )}
+        </div>
+    );
+};
+
+export default Showcase;
