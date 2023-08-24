@@ -1,45 +1,36 @@
-import React, { useEffect, useState } from "react";
-import { createUserWithEmailAndPassword,signInWithEmailAndPassword,
-    onAuthStateChanged,
-    signOut,} from "firebase/auth";
+import React, { useState } from "react";
+import {
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth";
+import { Link, useNavigate  } from "react-router-dom";
 import "./LoginPage.css";
 import { auth } from "./firebaseConfig";
+
 const LoginPage = () => {
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
   const [loginEmail, setloginEmail] = useState("");
   const [loginPassword, setloginPassword] = useState("");
   const [user, setUser] = useState({});
-
+  const navigate = useNavigate()
 
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
   });
 
-  const register = async () => {
+  const login = async (event) => {
+    event.preventDefault();
     try {
-      const user = await createUserWithEmailAndPassword(
+      const user = await signInWithEmailAndPassword(
         auth,
-        registerEmail,
-        registerPassword
+        loginEmail,
+        loginPassword
       );
       console.log(user);
+      navigate("/dashboard");
     } catch (error) {
       console.log(error.message);
     }
-  };
-
-  const login = async (event) => {
-    try {
-        const user = await signInWithEmailAndPassword(
-          auth,
-          loginEmail,
-          loginPassword
-        );
-        console.log(user);
-      } catch (error) {
-        console.log(error.message);
-      }
   };
 
   const logout = async () => {
@@ -48,54 +39,24 @@ const LoginPage = () => {
 
   return (
     <div className="login-page">
-      <form onClick={register}>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            onChange={(e) => setRegisterEmail(e.target.value)}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            onChange={(e) => setRegisterPassword(e.target.value)}
-          />
-        </div>
-
-        <div className="button-container">
-          <button type="submit">Register</button>
-        </div>
-      </form>
-
       <form onSubmit={login}>
         <div className="form-group">
           <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            onChange={(e) => setloginEmail(e.target.value)}
-            required
-          />
+          <input onChange={(e) => setloginEmail(e.target.value)} />
         </div>
 
         <div className="form-group">
           <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            onChange={(e) => setloginPassword(e.target.value)}
-            required
-          />
+          <input onChange={(e) => setloginPassword(e.target.value)} />
         </div>
 
         <div className="button-container">
           <button type="submit">Login</button>
+          <Link to="/login/register">
+            <button>Register</button>
+          </Link>
         </div>
       </form>
-      <h4> User Logged In: </h4>
-      {user?.email}
-      <button onClick={logout}> Sign Out </button>
     </div>
   );
 };
